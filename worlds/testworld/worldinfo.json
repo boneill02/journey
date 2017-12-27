@@ -1,0 +1,6 @@
+{
+    "title": "Test World",
+    "desc": "A test.",
+    "author": "Benjamin O'Neill",
+    "loadOrder": [ "world.js" ]
+}
