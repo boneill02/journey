@@ -15,7 +15,6 @@ public class WorldLoader {
         WorldInfo info = new WorldInfo();
 
         File infoFile = new File(dir.getAbsolutePath() + "/worldinfo.xml");
-        System.out.println(infoFile.getAbsolutePath());
 
         if(infoFile.exists()) {
             JAXBContext jaxbContext = JAXBContext.newInstance(WorldInfo.class);
