@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public abstract class Room extends Container {
 
-    private ArrayList<Entity> entities;
+    private Entity[] entities;
     private boolean accessible;
 
-    public Room(String tag, String description, ArrayList<GameObject> objects, ArrayList<Entity> entities,
+    public Room(String tag, String description, GameObject[] objects, Entity[] entities,
                 boolean accessible) {
         super(tag, description, objects);
         this.entities = entities;
@@ -21,8 +21,12 @@ public abstract class Room extends Container {
 
     public abstract void leave(World w, Direction d);
 
-    public ArrayList<Entity> getEntities() {
+    public Entity[] getEntities() {
         return entities;
+    }
+
+    public void setEntities(Entity[] entities) {
+        this.entities = entities;
     }
 
     public boolean isAccessible() {

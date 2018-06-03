@@ -2,14 +2,14 @@ package org.benoneill.journey.obj;
 
 import java.util.ArrayList;
 
-public abstract class Entity extends Container {
+public class Entity extends Container {
 
     private String[] shorthands;
     private ArrayList<ClothingItem> clothes;
     private Weapon equippedWeapon;
     private int health;
 
-    public Entity(String tag, String description, String[] shorthands, ArrayList<GameObject> objects) {
+    public Entity(String tag, String description, String[] shorthands, GameObject[] objects) {
         super(tag, description, objects);
         this.shorthands = shorthands;
         clothes = new ArrayList<>();

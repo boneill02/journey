@@ -13,6 +13,8 @@ public class WorldMap {
     public void addRoom(Room r, int x, int y) {
         if (rooms.containsKey(x)) {
             rooms.get(x).put(y, r);
+        } else {
+            rooms.put(x, new HashMap<Integer, Room>());
         }
     }
 

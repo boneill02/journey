@@ -7,7 +7,7 @@ public class ClothingItem extends Container {
     private float maxWeight;
     private int value;
 
-    public ClothingItem(String tag, String description, ArrayList<GameObject> objects,
+    public ClothingItem(String tag, String description, GameObject[] objects,
                         float maxWeight, int value) {
         super(tag, description, objects);
         this.maxWeight = maxWeight;

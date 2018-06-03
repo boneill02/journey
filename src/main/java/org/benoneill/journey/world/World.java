@@ -3,7 +3,6 @@ package org.benoneill.journey.world;
 import org.benoneill.journey.obj.Command;
 import org.benoneill.journey.obj.Entity;
 import org.benoneill.journey.obj.Item;
-import org.benoneill.journey.obj.Player;
 
 import java.util.Scanner;
 
@@ -15,20 +14,19 @@ public class World {
     private boolean running;
     private Command[] commands;
     private Entity[] entities;
+    private Entity player;
     private Item[] items;
-    private Player player;
     private int x, y;
     private String cmdPrefix;
 
     public World(String cmdPrefix, WorldMap[] maps,
-                 Room startRoom, Command[] commands, Item[] items, Entity[] entities, Player player) {
+                 Room startRoom, Command[] commands, Item[] items, Entity[] entities, Entity player) {
         this.cmdPrefix = cmdPrefix;
         this.room = startRoom;
         this.maps = maps;
         this.commands = commands;
         this.items = items;
         this.entities = entities;
-        this.player = player;
         running = false;
         x = 0;
         y = 0;
@@ -59,11 +57,11 @@ public class World {
         System.out.println("Invalid input!");
     }
 
-    public Player getPlayer() {
+    public Entity getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(Entity player) {
         this.player = player;
     }
 

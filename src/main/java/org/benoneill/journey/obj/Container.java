@@ -1,14 +1,15 @@
 package org.benoneill.journey.obj;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Container extends GameObject {
 
     private ArrayList<GameObject> objects;
 
-    public Container(String tag, String description, ArrayList<GameObject> objects) {
+    public Container(String tag, String description, GameObject[] objects) {
         super(tag, description);
-        this.objects = objects;
+        this.objects = new ArrayList<GameObject>(Arrays.asList(objects));
     }
 
     public boolean hasObject(GameObject obj) {
@@ -18,12 +19,14 @@ public abstract class Container extends GameObject {
         return false;
     }
 
-    public ArrayList<GameObject> getObjects() {
-        return objects;
+    public GameObject[] getObjects() {
+        GameObject[] arr = new GameObject[objects.size()];
+        arr = objects.toArray(arr);
+        return arr;
     }
 
-    public void setObjects(ArrayList<GameObject> objects) {
-        this.objects = objects;
+    public void setObjects(GameObject[] objects) {
+        this.objects = new ArrayList<GameObject>(Arrays.asList(objects));
     }
 
     public void addObject(GameObject object) {
