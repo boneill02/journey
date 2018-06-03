@@ -1,20 +1,30 @@
 package org.benoneill.journey.world;
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import com.google.gson.Gson;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.*;
 
 public class WorldLoader {
 
-    public static WorldInfo getWorldInfo(File dir) throws FileNotFoundException {
-        Gson gson = new GsonBuilder().create();
-        return gson.fromJson(new BufferedReader(new FileReader(new File(dir.getAbsolutePath() + "/worldinfo.json"))), new TypeToken<WorldInfo>(){}.getType());
+    public static WorldInfo getWorldInfo(File dir) throws FileNotFoundException, JAXBException {
+        WorldInfo info = new WorldInfo();
+
+        File infoFile = new File(dir.getAbsolutePath() + "/worldinfo.xml");
+        System.out.println(infoFile.getAbsolutePath());
+
+        if(infoFile.exists()) {
+            JAXBContext jaxbContext = JAXBContext.newInstance(WorldInfo.class);
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            info = (WorldInfo) unmarshaller.unmarshal(new File(dir + "/worldinfo.xml"));
+            return info;
+        }
+
+        return null;
     }
 
     public static World loadWorld(File gameJSDir) throws ScriptException, FileNotFoundException {
@@ -28,16 +38,11 @@ public class WorldLoader {
         engine.eval("var World = Java.extend(Java.type(\"org.benoneill.journey.world.World\"))");
         engine.eval("var WorldMap = Java.extend(Java.type(\"org.benoneill.journey.world.WorldMap\"))");
         engine.eval("var Room = Java.extend(Java.type(\"org.benoneill.journey.world.Room\"))");
-        engine.eval("var getln = function(s) { return new Java.type(\"java.io.Scanner\", Java.type(\"System.in\")).nextLine(); };");
+        engine.eval("var scanner = Java.type(\"java.util.Scanner\", Java.type(\"java.lang.System\").in);");
+        engine.eval("var readln = function() { return scanner.nextLine(); };");
+        engine.eval("var println = function(s) { return new Java.type(\"java.lang.System\").out.println(s); };");
 
-        File[] files = gameJSDir.listFiles();
-        for(File f : files) {
-            for(String s : WorldLoader.getWorldInfo(gameJSDir.getParentFile()).getLoadOrder()) {
-                if(f.getName().equals(s)) {
-                    engine.eval(new FileReader(f));
-                }
-            }
-        }
+        engine.eval(new FileReader(gameJSDir.getAbsolutePath() + "/world.js"));
 
         World world = (World) engine.eval("world");
 

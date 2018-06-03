@@ -1,12 +1,19 @@
 package org.benoneill.journey.world;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "world")
 public class WorldInfo {
 
+
+    @XmlAttribute(name = "title")
     String title;
+    @XmlAttribute(name = "desc")
     String description;
+    @XmlAttribute(name = "author")
     String author;
+    @XmlAttribute(name = "copyright")
     String copyright;
-    String[] loadOrder;
 
     public String getTitle() {
         return title;
@@ -24,28 +31,5 @@ public class WorldInfo {
         return copyright;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setCopyright(String copyright) {
-        this.copyright = copyright;
-    }
-
-    public String[] getLoadOrder() {
-        return loadOrder;
-    }
-
-    public void setLoadOrder(String[] loadOrder) {
-        this.loadOrder = loadOrder;
-    }
 
 }

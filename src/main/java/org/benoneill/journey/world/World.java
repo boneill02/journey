@@ -18,18 +18,10 @@ public class World {
     private Item[] items;
     private Player player;
     private int x, y;
-    private String title;
-    private String description;
-    private String author;
-    private String copyright;
     private String cmdPrefix;
 
-    public World(String title, String description, String author, String copyright, String cmdPrefix, WorldMap[] maps,
+    public World(String cmdPrefix, WorldMap[] maps,
                  Room startRoom, Command[] commands, Item[] items, Entity[] entities, Player player) {
-        this.title = title;
-        this.description = description;
-        this.author = author;
-        this.copyright = copyright;
         this.cmdPrefix = cmdPrefix;
         this.room = startRoom;
         this.maps = maps;
